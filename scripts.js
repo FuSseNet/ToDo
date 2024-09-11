@@ -8,7 +8,7 @@ function inputFile(event) {
 
 function Load(event) {
     data = JSON.parse(event.target.result);
-    jsonData = data;
+    let jsonData = data;
     const taskList = document.getElementById('taskList');
     taskList.innerHTML = '';
     for (let i = 0; i < jsonData.length; i++) {
@@ -155,7 +155,6 @@ function statusTask(event){
                     if (child.tagName === "IMG") {
                         child.src = "/images/donebutton.png";
                     }
-                    break;
                 }
                 obj.status = "finished";
             }
@@ -164,7 +163,6 @@ function statusTask(event){
                     if (child.tagName === "IMG") {
                         child.src = "/images/statusbutton.png";
                     }
-                    break;
                 }
                 obj.status = "in process";
             }
