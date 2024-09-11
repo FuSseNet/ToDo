@@ -12,15 +12,16 @@ function Load(event) {
     const taskList = document.getElementById('taskList');
     taskList.innerHTML = '';
     for (let i = 0; i < jsonData.length; i++) {
-        let item = document.createElement('div');
-        item.className = "thisTask";
-        item.id = i.toString();
 
         let obj = new Object();
         obj.Task = jsonData[i].Task;
         obj.delay = jsonData[i].delay;
         obj.status = jsonData[i].status;
-        obj.id = i.toString();
+        obj.id = jsonData[i].id;
+
+        let item = document.createElement('div');
+        item.className = "thisTask";
+        item.id = obj.id;
 
         let txt = document.createElement("span");
         txt.innerText = obj.Task;
@@ -74,12 +75,15 @@ function addTask() {
     {
         const item = document.createElement("div");
         item.className = "thisTask";
-        item.id = data.length;
         let obj = new Object();
         obj.Task = text;
         obj.delay = delay;
         obj.status = "in process";
-        obj.id = data.length;
+        obj.id = 0;
+        for (let id in data){
+            obj.id = (parseInt(id) + 1);
+        }
+        item.id = obj.id;
         data.push(obj);
 
         let txt = document.createElement("span");
@@ -125,10 +129,10 @@ function addTask() {
 
 function deleteTask(event){
 
-    for(let obj in data){
-        if (obj.id === event.currentTarget.parentElement.id)
+    for(let obj of data){
+        if (obj.id.toString() === event.currentTarget.parentElement.id)
         {
-            data.pop(obj);
+            data.splice(data.indexOf(obj), 1);
             break;
         }
     }
@@ -136,8 +140,8 @@ function deleteTask(event){
 }
 
 function statusTask(event){
-    for (let obj in data){
-        if (obj.id === event.currentTarget.parentElement.id)
+    for (let obj of data){
+        if (obj.id.toString() === event.currentTarget.parentElement.id)
         {
             if (obj.status === "in process")
             {
@@ -168,8 +172,8 @@ function editTask(event){
     const delay = prompt("Введите новый срок выполнения")
     if (text !== "")
     {
-        for (let obj in data){
-            if (obj.id === event.currentTarget.parentElement.id)
+        for (let obj of data){
+            if (obj.id.toString() === event.currentTarget.parentElement.id)
             {
                 obj.Task = text;
                 obj.delay = delay;
