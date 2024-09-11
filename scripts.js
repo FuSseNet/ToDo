@@ -71,7 +71,7 @@ function Load(event) {
 function addTask() {
     const text = prompt("Введите задачу");
     const delay = prompt("Введите срок выполнения")
-    if (text !== "")
+    if (text !== null)
     {
         let taskList = document.getElementById("taskList");
         const item = document.createElement("div");
@@ -174,7 +174,7 @@ function statusTask(event){
 function editTask(event){
     const text = prompt("Введите новый текст задачи");
     const delay = prompt("Введите новый срок выполнения")
-    if (text !== "")
+    if (text !== null)
     {
         for (let obj of data){
             if (obj.id.toString() === event.currentTarget.parentElement.id)
