@@ -13,7 +13,7 @@ function Load(event) {
     taskList.innerHTML = '';
     for (let i = 0; i < jsonData.length; i++) {
 
-        let obj = new Object();
+        let obj = {};
         obj.Task = jsonData[i].Task;
         obj.delay = jsonData[i].delay;
         obj.status = jsonData[i].status;
@@ -73,16 +73,22 @@ function addTask() {
     const delay = prompt("Введите срок выполнения")
     if (text !== "")
     {
+        let taskList = document.getElementById("taskList");
         const item = document.createElement("div");
         item.className = "thisTask";
-        let obj = new Object();
+        let obj = {};
         obj.Task = text;
         obj.delay = delay;
         obj.status = "in process";
-        obj.id = 0;
-        for (let id in data){
-            obj.id = (parseInt(id) + 1);
+
+        let childs = taskList.children;
+        if (taskList.children.length > 0){
+            obj.id = parseInt(taskList.children[childs.length-1].id)+1;
         }
+        else{
+            obj.id = 0;
+        }
+
         item.id = obj.id;
         data.push(obj);
 
@@ -123,7 +129,7 @@ function addTask() {
         delBtn.onclick = deleteTask;
         item.appendChild(delBtn);
 
-        document.getElementById("taskList").appendChild(item);
+        taskList.appendChild(item);
     }
 }
 
