@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>YouToDo</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"/>
+</head>
+<body style="background-color: blanchedalmond">
+<main class="main">
+    <p class="namePlace" ><h1 class="nameWord">Мои Дела</h1><p>
+
+    <div id="taskList" class="list">
+    </div>
+
+    <div class="buttons">
+        <button class="controlBtn" onclick="addTask()">Добавить задачу</button>
+        <button class="controlBtn" onclick="clearTasks()">Очистить</button>
+        <input class="controlBtn" type="file" id="loadJson" accept=".json">
+        <button class="controlBtn" id="save" onclick="preWriteFile()">Сохранить файл</button>
+    </div>
+</main>
+</body>
+<script src="scripts.js"></script>
+</html>
